@@ -85,6 +85,24 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'This Is a Test Article',
+    date: 'Apr 26th, 2019',
+    firstParagraph: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+          Venenatis lectus magna fringilla urna. Diam vulputate ut pharetra sit. Viverra suspendisse potenti nullam ac tortor vitae purus. 
+          Tempor commodo ullamcorper a lacus vestibulum. Ut sem nulla pharetra diam sit. At quis risus sed vulputate odio ut enim blandit volutpat. 
+          Mi bibendum neque egestas congue quisque egestas diam in.`,
+
+    secondParagraph: `Ultrices dui sapien eget mi proin sed libero enim. Ullamcorper eget nulla facilisi etiam dignissim diam quis enim. 
+          Enim lobortis scelerisque fermentum dui faucibus in ornare quam viverra. Dignissim enim sit amet venenatis urna cursus. 
+          Velit dignissim sodales ut eu sem integer vitae. Quam adipiscing vitae proin sagittis nisl rhoncus mattis. Aenean pharetra magna ac placerat vestibulum lectus mauris. 
+          At augue eget arcu dictum varius. Augue eget arcu dictum varius duis. In fermentum et sollicitudin ac orci phasellus egestas tellus rutrum.`,
+
+    thirdParagraph: `Ultrices dui sapien eget mi proin sed libero enim. Ullamcorper eget nulla facilisi etiam dignissim diam quis enim. 
+          Enim lobortis scelerisque fermentum dui faucibus in ornare quam viverra. Dignissim enim sit amet venenatis urna cursus. Velit dignissim sodales ut eu sem integer vitae. 
+          Quam adipiscing vitae proin sagittis nisl rhoncus mattis. Aenean pharetra magna ac placerat vestibulum lectus mauris. At augue eget arcu dictum varius. 
+          Augue eget arcu dictum varius duis. In fermentum et sollicitudin ac orci phasellus egestas tellus rutrum. Metus aliquam eleifend mi in nulla posuere sollicitudin.`
   }
 ];
 
@@ -112,3 +130,39 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+const createArticle = article => {
+  let container = document.createElement('div');
+  container.setAttribute('class', 'article');
+
+  let title = document.createElement('h2');
+  title.textContent = article['title'];
+  container.appendChild(title);
+
+  let date = document.createElement('p');
+  date.setAttribute('class', 'date');
+  date.textContent = article['date'];
+  container.appendChild(date);
+
+  for (i = 2; i < Object.values(article).length; i++) {
+    let content = document.createElement('p');
+    content.textContent = Object.values(article)[i];
+    container.appendChild(content);
+  }
+
+  let button = document.createElement('span');
+  button.setAttribute('class', 'expandButton');
+  button.textContent = 'Open';
+  button.addEventListener('click', () => {
+    container.classList.toggle('article-open');
+  })
+  container.appendChild(button);
+
+  return container;
+}
+
+let articles = document.querySelector('.articles');
+
+data.forEach(article => {
+  let newArticle = createArticle(article);
+  articles.appendChild(newArticle);
+})
