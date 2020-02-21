@@ -138,6 +138,11 @@ const createArticle = article => {
   title.textContent = article['title'];
   container.appendChild(title);
 
+  let date = document.createElement('p');
+  date.setAttribute('class', 'date');
+  date.textContent = article['date'];
+  container.appendChild(date);
+
   for (i = 2; i < Object.values(article).length; i++) {
     let content = document.createElement('p');
     content.textContent = Object.values(article)[i];
